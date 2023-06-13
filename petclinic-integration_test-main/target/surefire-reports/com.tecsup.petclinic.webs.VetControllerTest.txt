@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.tecsup.petclinic.webs.VetControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.tecsup.petclinic.webs.VetControllerTest
+Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in com.tecsup.petclinic.webs.VetControllerTest
+testFindVetKO  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "org.springframework.test.web.servlet.MockMvc.perform(org.springframework.test.web.servlet.RequestBuilder)" because "this.mockMvc" is null
+	at com.tecsup.petclinic.webs.VetControllerTest.testFindVetKO(VetControllerTest.java:78)
+
+testFindVetOK  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "org.springframework.test.web.servlet.MockMvc.perform(org.springframework.test.web.servlet.RequestBuilder)" because "this.mockMvc" is null
+	at com.tecsup.petclinic.webs.VetControllerTest.testFindVetOK(VetControllerTest.java:63)
+

@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.tecsup.petclinic.services.VetServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s - in com.tecsup.petclinic.services.VetServiceTest
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.036 s <<< FAILURE! - in com.tecsup.petclinic.services.VetServiceTest
+testFindVetByFirstName  Time elapsed: 0.014 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <0>
+	at com.tecsup.petclinic.services.VetServiceTest.testFindVetByFirstName(VetServiceTest.java:58)
+
+testFindVetById  Time elapsed: 0.004 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Record not found...!
+	at com.tecsup.petclinic.services.VetServiceTest.testFindVetById(VetServiceTest.java:39)
+

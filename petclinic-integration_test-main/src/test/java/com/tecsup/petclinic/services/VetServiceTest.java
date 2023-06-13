@@ -23,7 +23,40 @@ public class VetServiceTest {
 
     @Autowired
     private VetService vetService;
+    /**
+    *
+    */
+   @Test
+   public void testFindVetById() {
 
+       Integer ID = 1;
+       String FIRST_NAME = "James";
+       Vet vet = null;
+
+       try {
+           vet = this.vetService.findById(ID);
+       } catch (VetNotFoundException e) {
+           fail(e.getMessage());
+       }
+
+       log.info("" + vet);
+       assertEquals(FIRST_NAME, vet.getFirstName());
+
+   }
+
+   /**
+    *
+    */
+   @Test
+   public void testFindVetByFirstName() {
+
+       String FIRST_NAME = "James";
+       int SIZE_EXPECTED = 1;
+
+       List<Vet> vets = this.vetService.findByFirstName(FIRST_NAME);
+
+       assertEquals(SIZE_EXPECTED, vets.size());
+   }
     
     @Test
     public void testDeleteVet() {
