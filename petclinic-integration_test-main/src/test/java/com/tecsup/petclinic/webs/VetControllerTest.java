@@ -28,27 +28,24 @@ public class VetControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
-
-
 	/**
-     * 
-     * @throws Exception
-     */
+	 * 
+	 * @throws Exception
+	 * 
+	 */
 	@Test
-	public void testDeleteVet() throws Exception {
+	public void testFindAllVets() throws Exception {
 
-		 String FIRST_NAME = "Helen";
-	     String LAST_NAME = "Leary";
+		//int NRO_RECORD = 73;
+		int ID_FIRST_RECORD = 1;
 
-		VetTO newVetTO = new VetTO();
-		newVetTO.setFirstName(FIRST_NAME);
-		newVetTO.setLastName(LAST_NAME);
-
-
-		
+		this.mockMvc.perform(get("/vets"))
+				.andExpect(status().isOk())
+				.andExpect(content()
+						.contentType(MediaType.APPLICATION_JSON_VALUE))
+				//		    .andExpect(jsonPath("$", hasSize(NRO_RECORD)))
+				.andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
 	}
-	
 	/**
 	 * 
 	 * @throws Exception
@@ -65,8 +62,8 @@ public class VetControllerTest {
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id", is(1)))
-				.andExpect(jsonPath("$.first_name", is(FIRSTNAME_VET)))
-				.andExpect(jsonPath("$.last_name", is(LASTNAME_VET)));
+				.andExpect(jsonPath("$.first_Name", is(FIRSTNAME_VET)))
+				.andExpect(jsonPath("$.last_Name", is(LASTNAME_VET)));
 	}
 	/**
 	 * 
@@ -75,9 +72,25 @@ public class VetControllerTest {
 	@Test
 	public void testFindVetKO() throws Exception {
 
-		mockMvc.perform(get("/vets/666"))
-				.andExpect(status().isNotFound());
+	    mockMvc.perform(get("/vets/{id}", 666))
+	            .andExpect(status().isNotFound());
+	}
+	/**
+     * 
+     * @throws Exception
+     */
+	@Test
+	public void testDeleteVet() throws Exception {
 
+		 String FIRST_NAME = "Helen";
+	     String LAST_NAME = "Leary";
+
+		VetTO newVetTO = new VetTO();
+		newVetTO.setFirstName(FIRST_NAME);
+		newVetTO.setLastName(LAST_NAME);
+
+
+		
 	}
 
 
