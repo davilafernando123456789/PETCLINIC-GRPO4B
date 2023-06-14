@@ -12,11 +12,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-
+import com.tecsup.petclinic.mapper.VetMapper;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 /**
  * 
  */
@@ -25,6 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class VetControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
+
+
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -65,6 +68,33 @@ public class VetControllerTest {
 				.andExpect(jsonPath("$.first_Name", is(FIRSTNAME_VET)))
 				.andExpect(jsonPath("$.last_Name", is(LASTNAME_VET)));
 	}
+
+	/**
+	 * 
+	 * @throws Exception
+	 * 
+	 */
+	@SpringBootTest(classes = PetClinicApplicationTests.class)
+	@Test
+	@RequestMapping("/vets")
+	public void testInsertarVet() throws Exception {
+
+	    String FIRST_NAME = "Helen";
+	    String LAST_NAME = "Leary";
+
+	    VetTO newVetTO = new VetTO();
+	    newVetTO.setFirstName(FIRST_NAME);
+	    newVetTO.setLastName(LAST_NAME);
+
+	    String jsonRequest = om.writeValueAsString(newVetTO);
+
+	    mockMvc.perform(post("/vets")
+	            .content(jsonRequest)
+	            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+	            .andExpect(status().isCreated());
+	}
+
+
 	/**
 	 * 
 	 * @throws Exception
