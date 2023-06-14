@@ -92,6 +92,33 @@ public class VetControllerTest {
 
 		
 	}
+	@Test
+	public void testUpdateVet() throws Exception {
+        String FIRST_NAME = "Henry";
+        String LAST_NAME = "Stevens";
+        VetTO newVetTO = new VetTO();
+        newVetTO.setFirstName(FIRST_NAME);
+        newVetTO.setLastName(LAST_NAME);
+        ResultActions result = mockMvc.perform(post("/vets")
+                .content(om.writeValueAsString(newVetTO))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON));
+        result.andExpect(status().isCreated());
+        String vetId = JsonPath.parse(result.andReturn().getResponse().getContentAsString()).read("$.id");
+        String updatedFirstName = "John";
+        String updatedLastName = "Doe";
+        VetTO updatedVetTO = new VetTO();
+        updatedVetTO.setFirstName(updatedFirstName);
+        updatedVetTO.setLastName(updatedLastName);
+        mockMvc.perform(put("/vets/{id}", vetId)
+                .content(om.writeValueAsString(updatedVetTO))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(Integer.parseInt(vetId))))
+                .andExpect(jsonPath("$.firstName", is(updatedFirstName)))
+                .andExpect(jsonPath("$.lastName", is(updatedLastName)));
+    }
+}
+
 
 
 }
