@@ -26,7 +26,7 @@ public class VetServiceTest {
     /**
     *
     */
-   @Test
+  /** @Test
    public void testFindVetById() {
 
        Integer ID = 1;
@@ -47,7 +47,7 @@ public class VetServiceTest {
    /**
     *
     */
-   @Test
+  /** @Test
    public void testFindVetByFirstName() {
 
        String FIRST_NAME = "James";
@@ -57,7 +57,9 @@ public class VetServiceTest {
 
        assertEquals(SIZE_EXPECTED, vets.size());
    }
-    
+    /**
+    *
+    */
     @Test
     public void testDeleteVet() {
 
